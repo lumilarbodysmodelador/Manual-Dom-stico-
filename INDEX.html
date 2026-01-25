@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Kit Digital Limpeza Caseira - Economia e Renda Extra</title>
+    <meta name="description" content="Kit Completo: Manual de Receitas, Etiquetas para Impressão e Planilha de Precificação. Economize ou faça Renda Extra.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;800&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        
+        :root {
+            --primary-blue: #004aad;
+            --dark-blue: #002a60;
+            --accent-green: #27ae60;
+            --alert-red: #e74c3c;
+            --white: #fff;
+            --light-bg: #f4f8fb;
+        }
+
+        body { color: #333; line-height: 1.6; padding-bottom: 120px; /* Aumentei o espaço final */ }
+        h1, h2, h3 { font-family: 'League Spartan', sans-serif; font-weight: 700; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        img { max-width: 100%; height: auto; }
+
+        /* ANIMAÇÃO 3D DA CAPA */
+        .hero-img-3d {
+            max-width: 250px; 
+            width: 100%;       
+            margin: 20px 0;    
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4)); 
+            animation: float 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes float { 
+            0% { transform: translateY(0px); } 
+            50% { transform: translateY(-20px); } 
+            100% { transform: translateY(0px); } 
+        }
+
+        .hero-img-3d:hover { transform: scale(1.05); }
+
+        /* BOTÕES & FLUTUANTE */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-green);
+            color: var(--white);
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            text-transform: uppercase;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover { transform: scale(1.05); background-color: #219150; }
+        
+        /* Contêiner do botão flutuante */
+        .floating-cta-container {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            z-index: 1000;
+            text-align: center;
+            /* Adicionada transição para desaparecer suavemente */
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Classe utilitária para esconder o botão flutuante via JavaScript */
+        .hidden-cta {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none; /* Impede clique quando invisível */
+        }
+
+        .floating-cta {
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .urgency-text {
+            display: block;
+            background: #ffeb3b;
+            color: #333;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 10px;
+            width: fit-content;
+            margin: 0 auto -10px;
+            position: relative;
+            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(39, 174, 96, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            color: var(--white);
+            padding: 50px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content { display: flex; flex-direction: column; align-items: center; }
+        .headline { font-size: 2.2rem; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); color: #ffd700; }
+
+        /* SEÇÕES GERAIS */
+        section { padding: 60px 0; }
+        
+        .pain-section { text-align: center; background: var(--white); }
+        .pain-section h2 { color: var(--alert-red); margin-bottom: 20px; }
+        
+        .solution-section { background: var(--light-bg); }
+        .solution-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+        @media(min-width: 768px) { .solution-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+        .benefit-list li { margin-bottom: 10px; list-style: none; font-size: 1.1rem; }
+
+        /* BÔNUS SECTION */
+        .bonus-section {
+            background: #fff9e6; 
+            border-top: 2px dashed #f1c40f;
+            border-bottom: 2px dashed #f1c40f;
+            text-align: center;
+        }
+        .bonus-card {
+            background: var(--white);
+            max-width: 700px;
+            margin: 0 auto 30px auto; 
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .bonus-tag {
+            background: #e67e22; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;
+        }
+        .bonus-price { text-decoration: line-through; color: #999; }
+        .free-text { color: #27ae60; font-weight: 800; font-size: 1.2rem; }
+
+        /* OFERTA & CRONÔMETRO */
+        .offer-section {
+            background-color: var(--primary-blue);
+            background: linear-gradient(rgba(0, 74, 173, 0.9), rgba(0, 42, 96, 0.9)), url('https://img.freepik.com/fotos-gratis/produtos-de-limpeza-com-copia-espaco_23-2148535056.jpg'); 
+            background-size: cover;
+            background-position: center;
+            text-align: center; color: var(--white);
+        }
+        
+        .offer-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #333;
+            border: 3px solid var(--accent-green);
+            /* Garante que o conteúdo não cole no fundo e dá espaço para o botão principal */
+            padding-bottom: 50px; 
+        }
+
+        .countdown-container {
+            background: #ffebee; color: #c0392b; padding: 10px; border-radius: 5px; font-weight: bold; margin-bottom: 20px; display: inline-block; border: 1px solid #c0392b;
+        }
+        .timer-numbers { font-family: monospace; font-size: 1.5rem; }
+
+        .price-container { margin: 20px 0; }
+        .old-price { text-decoration: line-through; color: #777; font-size: 1.1rem; }
+        .new-price { font-size: 3.5rem; font-weight: 800; color: var(--accent-green); line-height: 1; display: block;}
+        
+        /* TABELA */
+        table { width: 100%; border-collapse: collapse; background: white; margin: 20px 0; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: center; }
+        th.good { background: var(--accent-green); color: white; }
+        th.bad { background: var(--alert-red); color: white; }
+
+        /* FAQ STYLE */
+        .faq-section { background: var(--white); }
+        .faq-section h2 { text-align: center; margin-bottom: 30px; color: var(--dark-blue); }
+        .faq-item { background: var(--light-bg); margin-bottom: 15px; padding: 20px; border-radius: 8px; border-left: 5px solid var(--primary-blue); }
+        .faq-item h3 { margin-bottom: 10px; font-size: 1.1rem; color: var(--dark-blue); }
+        .faq-item p { font-size: 0.95rem; color: #555; }
+
+        /* GARANTIA */
+        .guarantee-section { background: #f4f4f4; text-align: center; }
+
+        @media(max-width: 600px) {
+            .headline { font-size: 1.8rem; }
+            .hero-img-3d { max-width: 240px; }
+            .new-price { font-size: 2.8rem; }
+            /* Ajuste extra para mobile */
+            .offer-box { padding: 30px 15px 50px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-section">
+        <div class="container hero-content">
+            <h1 class="headline">KIT DIGITAL: FÁBRICA DE LIMPEZA EM CASA</h1>
+            <p style="font-size: 1.1rem; max-width: 800px;">Descubra a fórmula para fabricar produtos profissionais, economizar 70% e ainda <strong>lucrar com a venda</strong> usando nossa planilha automática.</p>
+            
+            <img src="https://i.ibb.co/5WnjT8Dq/capa-manual-economia-domestica-png.png" alt="Capa Manual Economia" class="hero-img-3d">
+            <a href="#oferta" class="cta-button pulse">QUERO O KIT COMPLETO + BÔNUS</a>
+            <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.9;">🔒 Manual PDF + Etiquetas + Planilha Financeira</p>
+        </div>
+    </header>
+
+    <section class="pain-section">
+        <div class="container">
+            <h2>Você trabalha para pagar produto de limpeza?</h2>
+            <p>Sabão líquido, amaciante, desinfetante... os preços sobem toda semana.</p>
+            <p>Além de pagar caro pela <strong>MARCA</strong>, você muitas vezes não sabe se está tendo lucro ao tentar vender suas receitas caseiras.</p>
+            <div style="background: #ffebee; padding: 15px; margin-top: 20px; border-radius: 8px; font-weight: bold; color: #c0392b;">
+                Chega de amadorismo. Tenha produtos de qualidade profissional e controle total dos custos.
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section">
+        <div class="container">
+            <div class="solution-grid">
+                <div>
+                    <span style="background: var(--primary-blue); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem;">O MÉTODO COMPLETO</span>
+                    <h2 style="color: var(--dark-blue); margin-top: 10px;">Kit Manual da Economia Doméstica</h2>
+                    <ul class="benefit-list" style="margin-top: 20px;">
+                        <li>✅ <strong>Super Sabão Líquido (Tipo Omo):</strong> Rende 20 Litros.</li>
+                        <li>✅ <strong>Amaciante Concentrado:</strong> Roupas macias e perfumadas.</li>
+                        <li>✅ <strong>Produtos Profissionais:</strong> Detergente, CIF Caseiro e mais.</li>
+                        <li>✅ <strong>Embalagem Perfeita:</strong> Etiquetas prontas para imprimir.</li>
+                        <li>✅ <strong>Gestão de Lucro:</strong> Planilha que calcula o preço de venda.</li>
+                        <li>🎥 <strong>Acesso Exclusivo a Vídeo Aulas:</strong> Passo a passo detalhado.</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center;">
+                   <h3 style="color: var(--primary-blue);">Economia Real:</h3>
+                   <table>
+                       <thead>
+                           <tr><th class="bad">MERCADO</th><th class="good">VOCÊ FAZENDO</th></tr>
+                       </thead>
+                       <tbody>
+                           <tr><td>Sabão 3L: <strong>R$ 45,00</strong></td><td>Sabão 20L: <strong>R$ 15,00</strong></td></tr>
+                           <tr><td>Amaciante: <strong>R$ 25,00</strong></td><td>Amaciante: <strong>R$ 5,00</strong></td></tr>
+                       </tbody>
+                   </table>
+                   <p style="font-weight: bold; color: var(--accent-green);">Economia de +R$ 100,00 logo no 1º mês!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bonus-section">
+        <div class="container">
+            <h2 style="color: var(--dark-blue); margin-bottom: 30px;">VOCÊ GANHA 2 BÔNUS EXCLUSIVOS</h2>
+
+            <div class="bonus-card">
+                <span class="bonus-tag">BÔNUS #01</span>
+                <h3 style="margin: 10px 0; color: var(--dark-blue);">Kit de Etiquetas Profissionais</h3>
+                <p>Não deixe seus produtos em garrafas sem identificação! Para garantir a <strong>Segurança</strong> da sua família e dar um visual profissional para venda, você recebe arquivos prontos para imprimir com o design de cada receita.</p>
+                <div style="margin-top: 15px;">
+                    <span class="bonus-price">Valor: R$ 29,90</span>
+                    <span class="free-text" style="margin-left: 10px;">GRÁTIS</span>
+                </div>
+            </div>
+
+            <div class="bonus-card">
+                <span class="bonus-tag" style="background: #27ae60;">BÔNUS #02</span>
+                <h3 style="margin: 10px 0; color: var(--dark-blue);">Planilha Automática de Precificação</h3>
+                <p>O maior erro de quem faz produtos caseiros é não saber cobrar. Com essa planilha, você coloca o preço dos ingredientes e ela te diz <strong>exatamente o custo do litro</strong> e por quanto você deve vender para ter lucro real.</p>
+                <div style="margin-top: 15px;">
+                    <span class="bonus-price">Valor: R$ 47,00</span>
+                    <span class="free-text" style="margin-left: 10px;">GRÁTIS</span>
+                </div>
+            </div>
+            
+            <p style="font-size: 1.2rem; font-weight: bold; color: var(--dark-blue);">Total em Bônus: <span style="text-decoration: line-through; color: #e74c3c;">R$ 76,90</span> <span style="color: var(--accent-green);">GRÁTIS HOJE!</span></p>
+        </div>
+    </section>
+
+    <section id="oferta" class="offer-section">
+        <div class="container">
+            <div class="offer-box">
+                <div class="countdown-container">
+                    ⚠️ OFERTA EXPIRA EM: <span id="timer" class="timer-numbers">15:00</span>
+                </div>
+
+                <h2>Pacote: Mestre da Economia</h2>
+                <ul style="text-align: left; list-style: none; margin: 20px 0; padding: 0 20px; font-size: 0.95rem;">
+                    <li style="margin-bottom: 8px;">📚 <strong>Manual PDF Completo</strong> (Receitas Passo a Passo)</li>
+                    <li style="margin-bottom: 8px;">🎥 <strong>Vídeo Aulas Exclusivas</strong></li>
+                    <li style="margin-bottom: 8px;">🏷️ <strong>Bônus 1:</strong> Etiquetas para Impressão</li>
+                    <li style="margin-bottom: 8px;">📊 <strong>Bônus 2:</strong> Planilha de Custos e Lucro</li>
+                </ul>
+                
+                <div class="price-container">
+                    <span class="old-price">Tudo isso de R$ 97,00</span>
+                    <span class="new-price">Por R$ 29,90</span>
+                    <p style="font-size: 0.9rem;">Pagamento único. Acesso Vitalício.</p>
+                </div>
+
+                <a href="https://chk.eduzz.com/Q9N5622K01" class="cta-button pulse big-cta">QUERO GARANTIR ESSE PREÇO</a>
+                
+                <div style="margin-top: 20px; font-size: 0.8rem; color: #666;">
+                    <p>✅ Compra Segura • 📥 Download Imediato</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="guarantee-section">
+        <div class="container">
+            <div style="font-size: 3rem;">🏅</div>
+            <h3>Garantia Blindada de 7 Dias</h3>
+            <p style="max-width: 600px; margin: 0 auto;">Se você não economizar na primeira receita ou achar que a planilha não te ajudou, nós devolvemos 100% do seu dinheiro. Sem perguntas.</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2>Dúvidas Frequentes</h2>
+            <div class="faq-item">
+                <h3>📦 O que exatamente eu vou receber?</h3>
+                <p>Você recebe o Kit Digital Completo: O E-book (PDF) com as receitas, os links para as vídeo aulas, o arquivo com as etiquetas de rótulo e a Planilha de Precificação.</p>
+            </div>
+            <div class="faq-item">
+                <h3>📊 Não sei usar Excel, vou conseguir usar a planilha?</h3>
+                <p>Sim! A planilha foi feita para iniciantes. Você só precisa preencher os campos indicados com o preço que pagou nos ingredientes e ela faz toda a conta sozinha.</p>
+            </div>
+            <div class="faq-item">
+                <h3>🧪 É difícil achar os ingredientes?</h3>
+                <p>Não! São itens comuns como óleo, álcool e bicarbonato. Você acha no mercado ou casas de essências.</p>
+            </div>
+            <div class="faq-item">
+                <h3>💰 Posso vender os produtos?</h3>
+                <p>Com certeza! Inclusive a planilha de bônus serve justamente para te ajudar a colocar o preço certo e ter lucro de verdade.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="floating-cta-container">
+        <span class="urgency-text">🔥 Últimas horas: Manual + 2 Bônus</span>
+        <a href="#oferta" class="cta-button floating-cta pulse">QUERO MEU KIT AGORA</a>
+    </div>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 20px; color: #fff; background: var(--dark-blue);">
+            <p>&copy; 2026 Manual da Economia Doméstica.</p>
+            <p style="font-size: 0.8rem; margin-top: 5px;">Contato: alessandraliz928@gmail.com</p>
+        </div>
+    </footer>
+
+    <script>
+        // LÓGICA DO CRONÔMETRO
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) { timer = duration; }
+            }, 1000);
+        }
+
+        // LÓGICA INTELIGENTE DO BOTÃO FLUTUANTE
+        // Se o usuário estiver vendo a oferta principal, o botão flutuante some.
+        function handleScroll() {
+            var offerSection = document.getElementById('oferta');
+            var floatingDiv = document.querySelector('.floating-cta-container');
+            
+            if (!offerSection || !floatingDiv) return;
+
+            var offerRect = offerSection.getBoundingClientRect();
+            var windowHeight = window.innerHeight;
+
+            // Verifica se a seção de oferta está visível na tela
+            // Se o topo da oferta estiver na tela OU o fundo da oferta estiver na tela
+            var isOfferVisible = (offerRect.top < windowHeight && offerRect.bottom >= 0);
+
+            if (isOfferVisible) {
+                floatingDiv.classList.add('hidden-cta');
+            } else {
+                floatingDiv.classList.remove('hidden-cta');
+            }
+        }
+
+        window.onload = function () {
+            // Inicia Timer
+            var fifteenMinutes = 60 * 15,
+                display = document.querySelector('#timer');
+            startTimer(fifteenMinutes, display);
+
+            // Inicia verificação de scroll
+            window.addEventListener('scroll', handleScroll);
+            // Chama uma vez para garantir o estado inicial correto
+            handleScroll();
+        };
+    </script>
+
+</body>
+</html>
